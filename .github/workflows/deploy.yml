@@ -30,10 +30,6 @@ jobs:
         run: |
             chmod +x gradlew
             ./gradlew clean build -x test
-        # Giải thích:
-        # -p ${{ matrix.service }} nghĩa là đứng ở ngoài nhưng ra lệnh build cho project con
-
-        # ... (Các bước Docker phía sau giữ nguyên)
 
       # Bước 2: Đăng nhập Docker Hub
       - name: Login to Docker Hub
@@ -46,6 +42,7 @@ jobs:
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v5
         with:
-          context: ./${{ matrix.service }}
+          context: .
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/${{ matrix.service }}:latest
+          # Đặt tên cứng luôn vì đây là repo riêng của order-service
+          tags: ${{ secrets.DOCKER_USERNAME }}/order-service:latest
