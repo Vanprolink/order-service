@@ -7,10 +7,10 @@ on:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-#    strategy:
-#      matrix:
-#        # Danh sách các service bạn muốn build (tên folder và tên image)
-#        service: [product-service, order-service, inventory-service, notification-service, api-gateway, discovery-server]
+    strategy:
+      matrix:
+        # Danh sách các service bạn muốn build (tên folder và tên image)
+        service: [order-service]
 
     steps:
       - name: Checkout code
