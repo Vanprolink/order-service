@@ -28,10 +28,12 @@ jobs:
       # Bước 1: Build file .jar bằng Gradle
       - name: Build with Gradle
         run: |
-          cd ${{ matrix.service }}
-          chmod +x gradlew
-          ./gradlew clean build -x test 
-          # -x test để build cho nhanh, bỏ qua test (nếu muốn test thì xóa đoạn -x test đi)
+          chmod +x gradlew  # Cấp quyền cho file ở root
+          ./gradlew -p ${{ matrix.service }} clean build -x test
+        # Giải thích:
+        # -p ${{ matrix.service }} nghĩa là đứng ở ngoài nhưng ra lệnh build cho project con
+
+        # ... (Các bước Docker phía sau giữ nguyên)
 
       # Bước 2: Đăng nhập Docker Hub
       - name: Login to Docker Hub
