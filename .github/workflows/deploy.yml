@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         # Danh sách các service bạn muốn build (tên folder và tên image)
-        service: [order-service]
+        service: [orderservice]
 
     steps:
       - name: Checkout code
