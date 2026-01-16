@@ -2,7 +2,11 @@ name: Build and Push Microservices
 
 on:
   push:
-    branches: [ "main", "master" ] # Chạy khi push vào nhánh main hoặc master
+    branches: [ "main"]
+
+permissions:
+  contents: read
+  packages: read  # <--- Bắt buộc phải có dòng này
 
 jobs:
   build-and-push:
@@ -30,6 +34,10 @@ jobs:
         run: |
             chmod +x gradlew
             ./gradlew clean build -x test
+        env:
+        # Nhớ phải có đoạn này thì permissions ở trên mới có tác dụng
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Bước 2: Đăng nhập Docker Hub
       - name: Login to Docker Hub

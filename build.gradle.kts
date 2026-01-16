@@ -25,11 +25,11 @@ repositories {
 	mavenCentral()
 	maven {
 		name = "GitHubPackages"
-		url = uri("https://maven.pkg.github.com/YOUR_USERNAME/TEN_REPO_COMMON_LIB")
+		url = uri("https://maven.pkg.github.com/Vanprolink/common-service")
 		credentials {
-			username = System.getenv("GITHUB_ACTOR") ?: "YOUR_USERNAME"
-			password = System.getenv("GITHUB_TOKEN") ?: "YOUR_TOKEN"
-			// Lưu ý: Trên máy local bạn cần điền Token cứng hoặc biến môi trường để tải được
+			// Logic: Nếu có biến môi trường (CI) thì dùng -> Nếu không thì tìm trong gradle.properties (Local)
+			username = System.getenv("GITHUB_ACTOR") ?: project.findProperty("gpr.user") as String?
+			password = System.getenv("GITHUB_TOKEN") ?: project.findProperty("gpr.key") as String?
 		}
 	}
 }
