@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         # Danh sách các service bạn muốn build (tên folder và tên image)
-        service: [orderservice]
+        service: [order-service]
 
     steps:
       - name: Checkout code
@@ -29,7 +29,6 @@ jobs:
       - name: Build with Gradle
         run: |
             chmod +x gradlew
-            cd ${{ matrix.service }}
             ../gradlew clean build -x test
         # Giải thích:
         # -p ${{ matrix.service }} nghĩa là đứng ở ngoài nhưng ra lệnh build cho project con
