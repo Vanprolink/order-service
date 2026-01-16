@@ -23,7 +23,15 @@ configurations {
 repositories {
 	mavenLocal()
 	mavenCentral()
-
+	maven {
+		name = "GitHubPackages"
+		url = uri("https://maven.pkg.github.com/YOUR_USERNAME/TEN_REPO_COMMON_LIB")
+		credentials {
+			username = System.getenv("GITHUB_ACTOR") ?: "YOUR_USERNAME"
+			password = System.getenv("GITHUB_TOKEN") ?: "YOUR_TOKEN"
+			// Lưu ý: Trên máy local bạn cần điền Token cứng hoặc biến môi trường để tải được
+		}
+	}
 }
 
 extra["springCloudVersion"] = "2023.0.0"
